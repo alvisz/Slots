@@ -18,6 +18,8 @@ export class ReelComponent implements OnInit {
   reel2List = [...this.reel1List];
   reel3List = [...this.reel1List];
 
+  canSpin = true; // Variable for disabling spin button when reels are spinning
+
 
   constructor() { }
 
@@ -38,7 +40,7 @@ export class ReelComponent implements OnInit {
   async spinReel1(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout);
-    const ms = until / (250 + this.getRandomNumber());
+    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel1List[this.reel1List.length - 1];
       this.reel1List.splice(-1, 1);
@@ -50,7 +52,7 @@ export class ReelComponent implements OnInit {
   async spinReel2(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout);
-    const ms = until / (250 + this.getRandomNumber());
+    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel2List[this.reel2List.length - 1];
       this.reel2List.splice(-1, 1);
@@ -62,7 +64,7 @@ export class ReelComponent implements OnInit {
   async spinReel3(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout);
-    const ms = until / (250 + this.getRandomNumber());
+    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel3List[this.reel3List.length - 1];
       this.reel3List.splice(-1, 1);
@@ -71,10 +73,15 @@ export class ReelComponent implements OnInit {
     }
   }
 
-  async spin(){
-    this.spinReel1(0);
-    this.spinReel2(500);
-    this.spinReel3(1000);
+  spin(){
+    this.canSpin = false;
+    const reel1Promise = this.spinReel1(0);
+    const reel2Promise = this.spinReel2(500);
+    const reel3Promise = this.spinReel3(1000);
+    Promise.all([reel1Promise, reel2Promise, reel3Promise]).then(value => {
+      console.log('done');
+      this.canSpin = true;
+    });
 
   }
 

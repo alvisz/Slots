@@ -9,4 +9,12 @@
   <div class="reel3 m-1">
     <img class="row" *ngFor="let image of reel3List" [src]="image.src">
   </div>
-<button mat-raised-button color="primary" (click)="spin()">Spin</button>
+
+<div class="statsbar">
+  <div class="row">
+    <button mat-raised-button color="accent" [disabled]="!canSpin"  class="col-2 ml-4" style="float: left; margin: 8px" (click)="spin()">SPIN</button>
+    <h2 class="col-4 mt-1 balance">Your balance: 1234</h2>
+    <button mat-raised-button color="accent" class="col-2 ml-4" style="float: right; margin: 8px">NEW GAME</button>
+    <button mat-raised-button color="accent" class="col-2 ml-4" style="float: right; margin: 8px">DEBUG</button>
+  </div>
+</div>
