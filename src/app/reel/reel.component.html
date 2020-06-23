@@ -1,0 +1,12 @@
+
+<img class="frame" src="./assets/blank-slot.png">
+  <div class="reel1 m-1">
+    <img class="row" *ngFor="let image of reel1List" [src]="image.src">
+  </div>
+  <div class="reel2 m-1">
+    <img class="row" *ngFor="let image of reel2List" [src]="image.src">
+  </div>
+  <div class="reel3 m-1">
+    <img class="row" *ngFor="let image of reel3List" [src]="image.src">
+  </div>
+<button mat-raised-button color="primary" (click)="spin()">Spin</button>

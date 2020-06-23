@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatButtonModule} from '@angular/material/button';
+import { ReelComponent } from './reel/reel.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReelComponent
   ],
     imports: [
         BrowserModule,

@@ -1,15 +1,5 @@
-<a>{{title}}</a>
-<div class="row justify-content-center">
-  <div #reel1 class="m-1">
-    <img class="row" *ngFor="let image of imageList" [src]="image.src">
-  </div>
-  <div #reel2 class="m-1">
-    <img class="row" *ngFor="let image of imageList" [src]="image.src">
-  </div>
-  <div #reel3 class="m-1">
-    <img class="row" *ngFor="let image of imageList" [src]="image.src">
-  </div>
+<div>
+  <a>{{title}}</a>
+  <app-reel></app-reel>
 </div>
-
-<button mat-raised-button color="primary" (click)="shuffle()">Primary</button>
 <router-outlet></router-outlet>

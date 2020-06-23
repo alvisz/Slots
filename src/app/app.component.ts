@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Slots';
 
-  imageList = [
+  slotList = [
     {id: 1, src: './assets/Reel/3xBAR.png'},
     {id: 2, src: './assets/Reel/BAR.png'},
     {id: 3, src: './assets/Reel/2xBAR.png'},
@@ -16,13 +16,9 @@ export class AppComponent {
     {id: 5, src: './assets/Reel/Cherry.png'}
   ];
 
-  shuffleArray = arr => arr
-    .map(a => [Math.random(), a])
-    .sort((a, b) => a[0] - b[0])
-    .map(a => a[1])
-
-  shuffle(){
-    this.imageList = this.shuffleArray(this.imageList);
-    console.log(this.imageList)
+  spin() {
+    let tempSlot = this.slotList[this.slotList.length -1];
+    this.slotList.splice(-1, 1);
+    this.slotList = [tempSlot, ...this.slotList];
   }
 }
