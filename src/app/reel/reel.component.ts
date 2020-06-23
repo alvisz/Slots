@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {SettingsService} from '../settings.service';
+import {DebugComponent} from '../debug/debug.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -18,15 +21,21 @@ export class ReelComponent implements OnInit {
   reel2List = [...this.reel1List];
   reel3List = [...this.reel1List];
 
+  boardArray = null; /* 2D Array of 3 arrays after spin, each array represents one line.
+                        Example: [1,1,1],[2,2,2],[3,3,3]
+                        Numbers are id's from reel1List
+                     */
+
   canSpin = true; // Variable for disabling spin button when reels are spinning
+  won = false;
 
 
-  constructor() { }
+  constructor(public Settings: SettingsService,
+              public dialog: MatDialog) { }
 
 
 
   ngOnInit(): void {
-    this.spin();
   }
 
   sleep(ms) {
@@ -80,9 +89,20 @@ export class ReelComponent implements OnInit {
     const reel3Promise = this.spinReel3(1000);
     Promise.all([reel1Promise, reel2Promise, reel3Promise]).then(value => {
       console.log('done');
+      this.Settings.addBalance(1);
+      this.boardArray = [ [this.reel1List[0].id, this.reel2List[0].id, this.reel3List[0].id],
+                          [this.reel1List[1].id, this.reel2List[1].id, this.reel3List[1].id],
+                          [this.reel1List[2].id, this.reel2List[2].id, this.reel3List[2].id]];
+      console.log(this.boardArray);
       this.canSpin = true;
     });
+  }
 
+  openDebug(){
+    let dialogRef = this.dialog.open(DebugComponent, {
+      height: '400px',
+      width: '600px',
+    });
   }
 
 }

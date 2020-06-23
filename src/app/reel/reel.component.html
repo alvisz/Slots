@@ -13,8 +13,11 @@
 <div class="statsbar">
   <div class="row">
     <button mat-raised-button color="accent" [disabled]="!canSpin"  class="col-2 ml-4" style="float: left; margin: 8px" (click)="spin()">SPIN</button>
-    <h2 class="col-4 mt-1 balance">Your balance: 1234</h2>
-    <button mat-raised-button color="accent" class="col-2 ml-4" style="float: right; margin: 8px">NEW GAME</button>
-    <button mat-raised-button color="accent" class="col-2 ml-4" style="float: right; margin: 8px">DEBUG</button>
+    <div class="col-4">
+      <h2 class="mt-1 balance">Your balance: {{Settings.getBalance()}}</h2>
+      <h2 class="blinking mt-1">You won 10 credits</h2>
+    </div>
+    <button mat-raised-button color="accent" class="col-2 " style="float: right; margin: 8px">NEW GAME</button>
+    <button mat-raised-button color="accent" class="col-2" style="float: right; margin: 8px" (click)="openDebug()">DEBUG</button>
   </div>
 </div>
