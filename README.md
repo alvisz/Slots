@@ -1,27 +1,37 @@
 # Slots
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
 
-## Development server
+### Getting started
+#### Software requirements
+- [Node.js](https://nodejs.org "Node.js") 10.19 or higher
+- [Angular 8](https://www.angular.io "Angular")
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Running the Application Locally
 
-## Code scaffolding
+To start server:
+```
+ng serve
+```
+### Interface
+![gameplay](https://s7.gifyu.com/images/playSlots.gif)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Slots game consists of 3 reels.
+#Pay table
+3 CHERRY symbols on top line 2000\
+3 CHERRY symbols on center line 1000\
+3 CHERRY symbols on bottom line 4000\
+3 7 symbols on any line 150\
+Any combination of CHERRY and 7 on any line 75\
+3 3xBAR symbols on any line 50\
+3 2xBAR symbols on any line 20\
+3 BAR symbols on any line 10\
+Combination of any BAR symbols on any line 5\
 
-## Build
+#Debug mode
+![debugmode](https://s7.gifyu.com/images/debugmode.gif)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+In debug mode user can select between fixed/random mode and change money amount
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
