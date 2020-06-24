@@ -14,22 +14,22 @@ export class DebugComponent implements OnInit{
   });
 
   firstReelForm = new FormGroup({
-    slotId: new FormControl(1),
-    position: new FormControl(0)
+    slotId: new FormControl(this.Settings.getReelLandingSlot(1)),
+    position: new FormControl(this.Settings.getReelPosition(1))
   });
 
   secondReelForm = new FormGroup({
-    slotId: new FormControl(1),
-    position: new FormControl(0)
+    slotId: new FormControl(this.Settings.getReelLandingSlot(2)),
+    position: new FormControl(this.Settings.getReelPosition(2))
   });
 
   thirdReelForm = new FormGroup({
-    slotId: new FormControl(1),
-    position: new FormControl(0)
+    slotId: new FormControl(this.Settings.getReelLandingSlot(3)),
+    position: new FormControl(this.Settings.getReelPosition(3))
   });
 
   moneyForm = new FormGroup({
-    money: new FormControl('',  [
+    money: new FormControl(this.Settings.getBalance(),  [
       Validators.required,
       Validators.pattern('^([+-]?[1-9]\\d*|0)$'),
       Validators.min(1),

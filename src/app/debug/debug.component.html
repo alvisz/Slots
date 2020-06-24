@@ -10,7 +10,7 @@
     <form [formGroup]="firstReelForm">
       <mat-form-field class="mr-2">
         <mat-label>First Reel</mat-label>
-        <mat-select formControlName="slotId">
+        <mat-select formControlName="slotId" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let slot of slotList" [value]="slot.id">
             {{slot.name}}
           </mat-option>
@@ -18,7 +18,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Landing position</mat-label>
-        <mat-select formControlName="position">
+        <mat-select formControlName="position" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let position of positionList" [value]="position.id">
             {{position.name}}
           </mat-option>
@@ -30,7 +30,7 @@
     <form [formGroup]="secondReelForm">
       <mat-form-field class="mr-2">
         <mat-label>Second Reel</mat-label>
-        <mat-select formControlName="slotId">
+        <mat-select formControlName="slotId" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let slot of slotList" [value]="slot.id">
             {{slot.name}}
           </mat-option>
@@ -38,7 +38,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Landing position</mat-label>
-        <mat-select formControlName="position">
+        <mat-select formControlName="position" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let position of positionList" [value]="position.id">
             {{position.name}}
           </mat-option>
@@ -50,7 +50,7 @@
     <form [formGroup]="thirdReelForm">
       <mat-form-field class="mr-2">
         <mat-label>Third Reel</mat-label>
-        <mat-select formControlName="slotId">
+        <mat-select formControlName="slotId" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let slot of slotList" [value]="slot.id">
             {{slot.name}}
           </mat-option>
@@ -58,7 +58,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Landing position</mat-label>
-        <mat-select formControlName="position">
+        <mat-select formControlName="position" [disabled]="this.Settings.getMode()">
           <mat-option *ngFor="let position of positionList" [value]="position.id">
             {{position.name}}
           </mat-option>
@@ -71,7 +71,7 @@
       <mat-label>Money</mat-label>
       <input matInput formControlName="money" type="number" placeholder="Enter new value" min="1" max="5000">
     </mat-form-field>
-    <button mat-button type="submit" color="primary" [disabled]="!moneyForm.valid">Set money</button>
+    <button mat-button class="ml-2" type="submit" color="primary" [disabled]="!moneyForm.valid">Set money</button>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
