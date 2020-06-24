@@ -13,7 +13,7 @@ To start server:
 ng serve
 ```
 ### Interface
-![gameplay](https://s7.gifyu.com/images/playSlots.gif)
+![gameplay](./playSlots.gif)
 
 Slots game consists of 3 reels.
 #Pay table
@@ -28,7 +28,7 @@ Any combination of CHERRY and 7 on any line 75\
 Combination of any BAR symbols on any line 5\
 
 #Debug mode
-![debugmode](https://s7.gifyu.com/images/debugmode.gif)
+![debugmode](./debugmode.gif)
 
 In debug mode user can select between fixed/random mode and change money amount
 
