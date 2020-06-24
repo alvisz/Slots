@@ -1,0 +1,17 @@
+<div class="lines row">
+  <div class="firstRow">
+    <div *ngIf="Line.getLineStatus(0,0)" class="first blinking"></div>
+    <div *ngIf="Line.getLineStatus(0,1)" class="second blinking"></div>
+    <div *ngIf="Line.getLineStatus(0,2)" class="third blinking"></div>
+  </div>
+  <div class="secondRow">
+    <div *ngIf="Line.getLineStatus(1,0)" class="first blinking"></div>
+    <div *ngIf="Line.getLineStatus(1,1)" class="second blinking"></div>
+    <div *ngIf="Line.getLineStatus(1,2)" class="third blinking"></div>
+  </div>
+  <div class="thirdRow">
+    <div *ngIf="Line.getLineStatus(2,0)" class="first blinking"></div>
+    <div *ngIf="Line.getLineStatus(2,1)" class="second blinking"></div>
+    <div *ngIf="Line.getLineStatus(2,2)" class="third blinking"></div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import {SettingsService} from './settings.service';
 import {Injectable} from '@angular/core';
+import {LineService} from './line.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +8,15 @@ import {Injectable} from '@angular/core';
 
 export class Reward {
 
-  constructor(public Settings: SettingsService) {}
+  constructor(public Settings: SettingsService,
+              public Line: LineService) {}
 
   public calculateReward(lines){
     let lineNo = 0;
     for ( const line of lines){
-      console.log('Start' + line);
       const isFullLine = this.checkIfFullLine(line);
       if (isFullLine){
+        this.Line.fillLine(lineNo);
         if (line[0] !== 5){
           this.Settings.addTempWinBal(this.combinationOf3AnyLine(line[0]));
         } else {
@@ -22,9 +24,12 @@ export class Reward {
         }
       } else {
         if (this.threeRandomBars(line)){
+          this.Line.fillLine(lineNo);
           this.Settings.addTempWinBal(5); // Adds 5 to temp win balance if there are three random bars
         }
         if (this.cherryAndSevenCombo(line)){
+          this.Line.setLineStatus(lineNo, 0, true);
+          this.Line.setLineStatus(lineNo, 1, true);
           this.Settings.addTempWinBal(75);
         }
       }
@@ -32,8 +37,10 @@ export class Reward {
     }
   }
 
+
+
   private checkIfFullLine(line){
-    if (line[0] === line [1] === line[2]){
+    if (line[0] === line[1] && line[0] === line[2]){
       return true;
     }
     return false;

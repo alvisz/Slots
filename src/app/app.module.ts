@@ -10,22 +10,33 @@ import { ReelComponent } from './reel/reel.component';
 import {SettingsService} from './settings.service';
 import { DebugComponent } from './debug/debug.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {Reward} from './reward';
+import { LinesComponent } from './lines/lines.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReelComponent,
-    DebugComponent
+    DebugComponent,
+    LinesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        NgbModule,
-        MatButtonModule,
-        MatDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
   entryComponents: [DebugComponent],
   providers: [SettingsService],
   bootstrap: [AppComponent]

@@ -1,1 +1,81 @@
-<p>debug works!</p>
+
+<h2 mat-dialog-title>Debug mode</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <form [formGroup]="modeForm">
+      <mat-slide-toggle formControlName="mode">Mode: {{getModeTranslation()}}</mat-slide-toggle>
+    </form>
+  </div>
+  <div>
+    <form [formGroup]="firstReelForm">
+      <mat-form-field class="mr-2">
+        <mat-label>First Reel</mat-label>
+        <mat-select formControlName="slotId">
+          <mat-option *ngFor="let slot of slotList" [value]="slot.id">
+            {{slot.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Landing position</mat-label>
+        <mat-select formControlName="position">
+          <mat-option *ngFor="let position of positionList" [value]="position.id">
+            {{position.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div>
+    <form [formGroup]="secondReelForm">
+      <mat-form-field class="mr-2">
+        <mat-label>Second Reel</mat-label>
+        <mat-select formControlName="slotId">
+          <mat-option *ngFor="let slot of slotList" [value]="slot.id">
+            {{slot.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Landing position</mat-label>
+        <mat-select formControlName="position">
+          <mat-option *ngFor="let position of positionList" [value]="position.id">
+            {{position.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div>
+    <form [formGroup]="thirdReelForm">
+      <mat-form-field class="mr-2">
+        <mat-label>Third Reel</mat-label>
+        <mat-select formControlName="slotId">
+          <mat-option *ngFor="let slot of slotList" [value]="slot.id">
+            {{slot.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Landing position</mat-label>
+        <mat-select formControlName="position">
+          <mat-option *ngFor="let position of positionList" [value]="position.id">
+            {{position.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <form [formGroup]="moneyForm" (ngSubmit)="setMoney()">
+    <mat-form-field>
+      <mat-label>Money</mat-label>
+      <input matInput formControlName="money" type="number" placeholder="Enter new value" min="1" max="5000">
+    </mat-form-field>
+    <button mat-button type="submit" color="primary" [disabled]="!moneyForm.valid">Set money</button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+

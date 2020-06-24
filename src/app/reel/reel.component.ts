@@ -3,6 +3,7 @@ import {SettingsService} from '../settings.service';
 import {DebugComponent} from '../debug/debug.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Reward} from '../reward';
+import {LineService} from '../line.service';
 
 
 @Component({
@@ -45,49 +46,81 @@ export class ReelComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  getRandomNumber() {
-    return Math.floor(Math.random() * Math.floor(5)) + 1; // Gets random number from 1 to 5
+  getMagicNumber(reelNo: number) {
+    if (this.Settings.getMode()){
+      return Math.floor(Math.random() * Math.floor(5)) + 1; // Gets random number from 1 to 5
+    } else {
+      return this.Settings.getReelLandingSlot(reelNo);
+    }
   }
 
   async spinReel1(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout); // Time how long reel should spin
-    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
+    const ms = until / (250 + this.getMagicNumber(1)); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel1List[this.reel1List.length - 1];
       this.reel1List.splice(-1, 1);
       this.reel1List = [tempSlot, ...this.reel1List];
       await this.sleep(ms);
     }
+    if (!this.Settings.getMode()){
+      console.log("1.Position needed: "+ this.Settings.getReelPosition(1));
+      console.log("1.Slot needed: "+ this.getMagicNumber(1));
+      while (this.reel1List[this.Settings.getReelPosition(1)].id !== this.getMagicNumber(1)){
+        const tempSlot = this.reel1List[this.reel1List.length - 1];
+        this.reel1List.splice(-1, 1);
+        this.reel1List = [tempSlot, ...this.reel1List];
+      }
+    }
   }
 
   async spinReel2(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout); // Time how long reel should spin
-    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
+    const ms = until / (250 + this.getMagicNumber(2)); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel2List[this.reel2List.length - 1];
       this.reel2List.splice(-1, 1);
       this.reel2List = [tempSlot, ...this.reel2List];
       await this.sleep(ms);
     }
+    if (!this.Settings.getMode()){
+      console.log("2.Position needed: "+ this.Settings.getReelPosition(2))
+      console.log("2.Slot needed: "+ this.getMagicNumber(2));
+      while (this.reel2List[this.Settings.getReelPosition(2)].id !== this.getMagicNumber(2)){
+        const tempSlot = this.reel2List[this.reel2List.length - 1];
+        this.reel2List.splice(-1, 1);
+        this.reel2List = [tempSlot, ...this.reel2List];
+      }
+    }
   }
 
   async spinReel3(timeout){
     await this.sleep(timeout);
     const until = 2000 + Number(timeout); // Time how long reel should spin
-    const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
+    const ms = until / (250 + this.getMagicNumber(3)); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel3List[this.reel3List.length - 1];
       this.reel3List.splice(-1, 1);
       this.reel3List = [tempSlot, ...this.reel3List];
       await this.sleep(ms);
     }
+    if (!this.Settings.getMode()){
+      console.log("3.Position needed: "+ this.Settings.getReelPosition(3))
+      console.log("3.Slot needed: "+ this.getMagicNumber(3));
+      while (this.reel3List[this.Settings.getReelPosition(3)].id !== this.getMagicNumber(3)){
+        const tempSlot = this.reel3List[this.reel3List.length - 1];
+        this.reel3List.splice(-1, 1);
+        this.reel3List = [tempSlot, ...this.reel3List];
+      }
+    }
   }
+
 
   spin(){
     this.Settings.removeBalance(1);
-    this.Settings.setCanSpin(false)
+    this.Settings.setCanSpin(false);
     const reel1Promise = this.spinReel1(0);
     const reel2Promise = this.spinReel2(500);
     const reel3Promise = this.spinReel3(1000);
@@ -109,8 +142,7 @@ export class ReelComponent implements OnInit {
 
   openDebug(){
     let dialog = this.dialog.open(DebugComponent, {
-      height: '400px',
-      width: '650px',
+      width: '650px'
     });
   }
 
