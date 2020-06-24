@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SettingsService} from '../settings.service';
 import {DebugComponent} from '../debug/debug.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Reward} from '../reward';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class ReelComponent implements OnInit {
 
 
   constructor(public Settings: SettingsService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private Rewards: Reward) { }
+
 
 
 
@@ -48,7 +51,7 @@ export class ReelComponent implements OnInit {
 
   async spinReel1(timeout){
     await this.sleep(timeout);
-    const until = 2000 + Number(timeout);
+    const until = 2000 + Number(timeout); // Time how long reel should spin
     const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel1List[this.reel1List.length - 1];
@@ -60,7 +63,7 @@ export class ReelComponent implements OnInit {
 
   async spinReel2(timeout){
     await this.sleep(timeout);
-    const until = 2000 + Number(timeout);
+    const until = 2000 + Number(timeout); // Time how long reel should spin
     const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel2List[this.reel2List.length - 1];
@@ -72,7 +75,7 @@ export class ReelComponent implements OnInit {
 
   async spinReel3(timeout){
     await this.sleep(timeout);
-    const until = 2000 + Number(timeout);
+    const until = 2000 + Number(timeout); // Time how long reel should spin
     const ms = until / (250 + this.getRandomNumber()); // How many ms per spin
     for (let i = 0; i < until; i += ms){
       const tempSlot = this.reel3List[this.reel3List.length - 1];
@@ -83,25 +86,31 @@ export class ReelComponent implements OnInit {
   }
 
   spin(){
-    this.canSpin = false;
+    this.Settings.removeBalance(1);
+    this.Settings.setCanSpin(false)
     const reel1Promise = this.spinReel1(0);
     const reel2Promise = this.spinReel2(500);
     const reel3Promise = this.spinReel3(1000);
     Promise.all([reel1Promise, reel2Promise, reel3Promise]).then(value => {
-      console.log('done');
-      this.Settings.addBalance(1);
       this.boardArray = [ [this.reel1List[0].id, this.reel2List[0].id, this.reel3List[0].id],
                           [this.reel1List[1].id, this.reel2List[1].id, this.reel3List[1].id],
-                          [this.reel1List[2].id, this.reel2List[2].id, this.reel3List[2].id]];
-      console.log(this.boardArray);
-      this.canSpin = true;
+                          [this.reel1List[2].id, this.reel2List[2].id, this.reel3List[2].id]]; // Could have used For cycle,
+                                                                                              // but this is easier to understand
+      this.Rewards.calculateReward(this.boardArray);
+      this.Settings.transferWinBalToBal();
     });
   }
 
+
+  newGame(){
+    this.Settings.setCanSpin(true)
+    this.Settings.setBalance(10);
+  }
+
   openDebug(){
-    let dialogRef = this.dialog.open(DebugComponent, {
+    let dialog = this.dialog.open(DebugComponent, {
       height: '400px',
-      width: '600px',
+      width: '650px',
     });
   }
 

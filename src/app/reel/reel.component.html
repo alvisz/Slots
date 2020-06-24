@@ -11,13 +11,13 @@
   </div>
 
 <div class="statsbar">
-  <div class="row">
-    <button mat-raised-button color="accent" [disabled]="!canSpin"  class="col-2 ml-4" style="float: left; margin: 8px" (click)="spin()">SPIN</button>
+  <div class="row" style="height: 100px;">
+    <button mat-raised-button color="accent" [disabled]="!Settings.getCanSpin()"  class="col-2 ml-4" style="float: left; margin: 8px" (click)="spin()">SPIN</button>
     <div class="col-4">
       <h2 class="mt-1 balance">Your balance: {{Settings.getBalance()}}</h2>
-      <h2 class="blinking mt-1">You won 10 credits</h2>
+      <h2 class="blinking" *ngIf="Settings.getTempWinBal() !== 0">You won {{Settings.getTempWinBal()}} credits</h2>
     </div>
-    <button mat-raised-button color="accent" class="col-2 " style="float: right; margin: 8px">NEW GAME</button>
+    <button mat-raised-button color="accent" class="col-2 " style="float: right; margin: 8px" (click)="newGame()">NEW GAME</button>
     <button mat-raised-button color="accent" class="col-2" style="float: right; margin: 8px" (click)="openDebug()">DEBUG</button>
   </div>
 </div>

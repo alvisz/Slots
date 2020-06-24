@@ -10,6 +10,7 @@ import { ReelComponent } from './reel/reel.component';
 import {SettingsService} from './settings.service';
 import { DebugComponent } from './debug/debug.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {Reward} from './reward';
 
 @NgModule({
   declarations: [
