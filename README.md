@@ -16,6 +16,8 @@ ng serve
 ![gameplay](./playSlots.gif)
 
 Slots game consists of 3 reels.
+
+
 ##Pay table
 3 CHERRY symbols on top line 2000\
 3 CHERRY symbols on center line 1000\
@@ -25,7 +27,7 @@ Any combination of CHERRY and 7 on any line 75\
 3 3xBAR symbols on any line 50\
 3 2xBAR symbols on any line 20\
 3 BAR symbols on any line 10\
-Combination of any BAR symbols on any line 5\
+Combination of any BAR symbols on any line 5
 
 ##Debug mode
 
