@@ -21,11 +21,6 @@ export class SettingsService {
 
   constructor(public Line: LineService) { }
 
-
-  addBalance(value: number){
-    this.balance += value;
-  }
-
   removeBalance(value: number){
     this.balance -= value;
   }
@@ -46,7 +41,7 @@ export class SettingsService {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async transferWinBalToBal(){
+  async transferWinBalToBal(){ // Animates the transfer of win to balance
     if (this.tempWinBal === 0) {
       this.canSpin = true;
       return;
@@ -76,13 +71,15 @@ export class SettingsService {
     } else {return this.canSpin; }
   }
 
-  setMode(value: boolean){
+  setMode(value: boolean){ // Sets the mode between fixed and random
     this.isRandom = value;
   }
+
   getMode(){
     return this.isRandom;
   }
-  getReelPosition(reelNo: number){
+
+  getReelPosition(reelNo: number){ // Gets reel position, used if the fixed mode is on
     if (reelNo === 1){
       return this.reel1LandingPosition;
     }
@@ -94,7 +91,7 @@ export class SettingsService {
     }
   }
 
-  getReelLandingSlot(reelNo: number){
+  getReelLandingSlot(reelNo: number){ // Gets reel slot type that will land on getReelPosition position, used if the fixed mode is on
     if (reelNo === 1){
       return this.reel1LandingSlot;
     }
@@ -106,12 +103,10 @@ export class SettingsService {
     }
   }
 
-  setReelPosition(reelNo: number, slotId: number, slotPosition: number){
+  setReelPosition(reelNo: number, slotId: number, slotPosition: number){ // Slot position is 0-Top, 1-Mid, 2- Bot
     if (reelNo === 1){
       this.reel1LandingPosition = slotPosition;
-      console.log("Position: "+slotPosition)
       this.reel1LandingSlot = slotId;
-      console.log("slotID: "+slotId)
     }
     if (reelNo === 2){
       this.reel2LandingPosition = slotPosition;
@@ -122,8 +117,5 @@ export class SettingsService {
       this.reel3LandingSlot = slotId;
     }
   }
-
-
-
 
 }

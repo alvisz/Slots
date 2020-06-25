@@ -16,6 +16,8 @@ export class LineService {
   thirdLineSecond   = false;
   thirdLineThird    = false;
 
+  // This is a service that manages those red lines that blink if there is a win
+  // Everything else is self-explanatory, e.g. if true, line is visible, if false, it's not
 
   getLineStatus(line: number, position: number){
     if (line === 0){

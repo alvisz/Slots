@@ -14,20 +14,20 @@ export class Reward {
   public calculateReward(lines){
     let lineNo = 0;
     for ( const line of lines){
-      const isFullLine = this.checkIfFullLine(line);
+      const isFullLine = this.checkIfFullLine(line); // Checks for full line
       if (isFullLine){
         this.Line.fillLine(lineNo);
         if (line[0] !== 5){
           this.Settings.addTempWinBal(this.combinationOf3AnyLine(line[0]));
         } else {
-          this.Settings.addTempWinBal(this.threeCherries(lineNo));
+          this.Settings.addTempWinBal(this.threeCherries(lineNo)); // Checks reward by depending on which lane there are three cherries
         }
       } else {
-        if (this.threeRandomBars(line)){
+        if (this.threeRandomBars(line)){ // Checks if there are three random bars on one line
           this.Line.fillLine(lineNo);
           this.Settings.addTempWinBal(5); // Adds 5 to temp win balance if there are three random bars
         }
-        if (this.cherryAndSevenCombo(line)){
+        if (this.cherryAndSevenCombo(line)){ // Checks if there is cherry and seven combo from the left
           this.Line.setLineStatus(lineNo, 0, true);
           this.Line.setLineStatus(lineNo, 1, true);
           this.Settings.addTempWinBal(75);
@@ -36,17 +36,9 @@ export class Reward {
       lineNo++;
     }
   }
-
-
-
   private checkIfFullLine(line){
-    if (line[0] === line[1] && line[0] === line[2]){
-      return true;
-    }
-    return false;
+    return line[0] === line[1] && line[0] === line[2];
   }
-
-
   private combinationOf3AnyLine(id: number){
     switch (id) {
       case 1: // If 3xBar
@@ -78,6 +70,8 @@ export class Reward {
     /* 1 - 3xBar
        2 - 1xBar
        3 - 2xBar
+       4 - Seven
+       5 - Cherry
     */
     if (!line.includes(4)) {
       if (!line.includes(5)) {

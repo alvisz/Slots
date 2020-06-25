@@ -66,15 +66,12 @@ export class DebugComponent implements OnInit{
       this.Settings.setMode(val.mode);
     });
     this.firstReelForm.valueChanges.subscribe(val => {
-      console.log('slotID: '+ val.slotId + ', position: ' + val.position);
       this.Settings.setReelPosition(1, val.slotId, val.position);
     });
     this.secondReelForm.valueChanges.subscribe(val => {
-      console.log('slotID: '+ val.slotId + ', position: ' + val.position);
       this.Settings.setReelPosition(2, val.slotId, val.position);
     });
     this.thirdReelForm.valueChanges.subscribe(val => {
-      console.log('slotID: '+ val.slotId + ', position: ' + val.position);
       this.Settings.setReelPosition(3, val.slotId, val.position);
     });
   }

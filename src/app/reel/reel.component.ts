@@ -28,9 +28,6 @@ export class ReelComponent implements OnInit {
                         Numbers are id's from reel1List
                      */
 
-  canSpin = true; // Variable for disabling spin button when reels are spinning
-  won = false;
-
 
   constructor(public Settings: SettingsService,
               public dialog: MatDialog,
@@ -50,7 +47,7 @@ export class ReelComponent implements OnInit {
     if (this.Settings.getMode()){
       return Math.floor(Math.random() * Math.floor(5)) + 1; // Gets random number from 1 to 5
     } else {
-      return this.Settings.getReelLandingSlot(reelNo);
+      return this.Settings.getReelLandingSlot(reelNo); // If fixed mode, takes values from Settings service
     }
   }
 
@@ -64,9 +61,7 @@ export class ReelComponent implements OnInit {
       this.reel1List = [tempSlot, ...this.reel1List];
       await this.sleep(ms);
     }
-    if (!this.Settings.getMode()){
-      console.log("1.Position needed: "+ this.Settings.getReelPosition(1));
-      console.log("1.Slot needed: "+ this.getMagicNumber(1));
+    if (!this.Settings.getMode()){ // Checks if fixed mode is off
       while (this.reel1List[this.Settings.getReelPosition(1)].id !== this.getMagicNumber(1)){
         const tempSlot = this.reel1List[this.reel1List.length - 1];
         this.reel1List.splice(-1, 1);
@@ -85,9 +80,7 @@ export class ReelComponent implements OnInit {
       this.reel2List = [tempSlot, ...this.reel2List];
       await this.sleep(ms);
     }
-    if (!this.Settings.getMode()){
-      console.log("2.Position needed: "+ this.Settings.getReelPosition(2))
-      console.log("2.Slot needed: "+ this.getMagicNumber(2));
+    if (!this.Settings.getMode()){ // Checks if fixed mode is off
       while (this.reel2List[this.Settings.getReelPosition(2)].id !== this.getMagicNumber(2)){
         const tempSlot = this.reel2List[this.reel2List.length - 1];
         this.reel2List.splice(-1, 1);
@@ -106,9 +99,7 @@ export class ReelComponent implements OnInit {
       this.reel3List = [tempSlot, ...this.reel3List];
       await this.sleep(ms);
     }
-    if (!this.Settings.getMode()){
-      console.log("3.Position needed: "+ this.Settings.getReelPosition(3))
-      console.log("3.Slot needed: "+ this.getMagicNumber(3));
+    if (!this.Settings.getMode()){ // Checks if fixed mode is off
       while (this.reel3List[this.Settings.getReelPosition(3)].id !== this.getMagicNumber(3)){
         const tempSlot = this.reel3List[this.reel3List.length - 1];
         this.reel3List.splice(-1, 1);
@@ -130,18 +121,18 @@ export class ReelComponent implements OnInit {
                           [this.reel1List[2].id, this.reel2List[2].id, this.reel3List[2].id]]; // Could have used For cycle,
                                                                                               // but this is easier to understand
       this.Rewards.calculateReward(this.boardArray);
-      this.Settings.transferWinBalToBal();
+      this.Settings.transferWinBalToBal(); // Makes that satisfying counting animation on win
     });
   }
 
 
   newGame(){
-    this.Settings.setCanSpin(true)
+    this.Settings.setCanSpin(true);
     this.Settings.setBalance(10);
   }
 
   openDebug(){
-    let dialog = this.dialog.open(DebugComponent, {
+    this.dialog.open(DebugComponent, {
       width: '650px'
     });
   }
